@@ -1,7 +1,7 @@
 public class LinkedListDeque<Item> {
 
 	
-	public class Node {
+	private class Node {
 		public Node prev;
         public Item item;
 		public Node next;
@@ -134,29 +134,5 @@ public class LinkedListDeque<Item> {
             return getRecursiveHelper(index - 1, position.next);
         }
     }
-}
-
-
-    /*public static void main (String[] args) {
-        LinkedListDeque testLink = new LinkedListDeque();
-        // series of methods run for testing
-        testLink.addFirst(2);
-        testLink.addFirst(1);
-        testLink.addLast(3);
-        testLink.addLast(4);
-        testLink.printDeque();
-        System.out.println();
-        System.out.println(testLink.get(2)); // should retrieve the integer 3
-        System.out.println(testLink.getRecursive(3)); // should retrieve the integer 4
-        System.out.println(testLink.size()); // should be 4
-        System.out.println(testLink.removeLast()); // should be 4
-        System.out.println(testLink.removeFirst()); // should be 1
-        System.out.println(testLink.size()); // should be 2
-        testLink.printDeque();
-        System.out.println();
-        System.out.println(testLink.get(4)); // should be null
-        System.out.println(testLink.getRecursive(5)); // should be null
-        System.out.println(testLink.isEmpty()); // should be false
-
         
-    }*/
+    }
