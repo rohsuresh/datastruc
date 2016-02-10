@@ -80,25 +80,43 @@ public class TestLinkedListDeque1B {
 		testLink.addLast(1);
 		testLink.addLast(2);
 		testLink.addLast(3);
-		assertEquals(null, testLink.get(4));
-		assertEquals(new Integer(0), (Integer) testLink.get(0));
 		testLink.addFirst(8);
 		testLink.addLast(4);
 		// 8 0 1 2 3 4
-		assertEquals(new Integer(8), (Integer) testLink.get(0));
-		assertEquals(new Integer(0), (Integer) testLink.get(1));
-		assertEquals(new Integer(2), (Integer) testLink.get(3));
 		testLink.removeFirst();
 		testLink.removeFirst();
 		testLink.removeFirst();
 		testLink.removeLast();
 		// 2 3
-		assertEquals(new Integer(2), (Integer) testLink.get(0));
-		assertEquals(null, testLink.get(5));
-		assertEquals(new Integer(3), (Integer) testLink.get(1));
+		FailureSequence fs = new FailureSequence();
+        DequeOperation dequeOp1 = new DequeOperation("addFirst", 0);
+        DequeOperation dequeOp2 = new DequeOperation("addLast", 1);
+        DequeOperation dequeOp3 = new DequeOperation("addLast", 2);
+        DequeOperation dequeOp4 = new DequeOperation("addLast", 3);
+        DequeOperation dequeOp5 = new DequeOperation("addFirst", 8);
+        DequeOperation dequeOp6 = new DequeOperation("addLast", 4);
+        DequeOperation dequeOp7 = new DequeOperation("removeFirst");
+        DequeOperation dequeOp8 = new DequeOperation("removeFirst");
+        DequeOperation dequeOp9 = new DequeOperation("removeFirst");
+        DequeOperation dequeOp10 = new DequeOperation("removeLast");
+        DequeOperation dequeOp11 = new DequeOperation("get", 1);
+
+        fs.addOperation(dequeOp1);
+        fs.addOperation(dequeOp2);
+        fs.addOperation(dequeOp3);
+        fs.addOperation(dequeOp4);
+        fs.addOperation(dequeOp5);
+        fs.addOperation(dequeOp6);
+        fs.addOperation(dequeOp7);
+        fs.addOperation(dequeOp8);
+        fs.addOperation(dequeOp9);
+        fs.addOperation(dequeOp10);
+        fs.addOperation(dequeOp11);
+		
+		assertEquals(fs.toString(), new Integer(3), (Integer) testLink.get(1));
 	}
 
-	@Test
+	/*@Test
 	public void getRecursiveTest() {
 		StudentLinkedListDeque<Integer> testLink = new StudentLinkedListDeque<Integer>();
 		testLink.addFirst(0);
@@ -120,8 +138,8 @@ public class TestLinkedListDeque1B {
 		// 2 3
 		assertEquals(new Integer(2), (Integer) testLink.getRecursive(0));
 		assertEquals(null, testLink.getRecursive(5));
-		assertEquals(new Integer(3), (Integer) testLink.getRecursive(1));
-	}
+		assertEquals("Wrong output", new Integer(3), (Integer) testLink.getRecursive(1));
+	}*/
 	
 	public static void main(String... args) {        
         jh61b.junit.TestRunner.runTests("failed", TestLinkedListDeque1B.class);

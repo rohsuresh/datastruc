@@ -40,28 +40,35 @@ public class TestArrayDeque1B {
 	@Test
 	public void testSize() {
 		StudentArrayDeque<Integer> testArray = new StudentArrayDeque<Integer>();
-		Integer sizeCheck = testArray.size();
-		assertEquals(new Integer(0), sizeCheck);
 		testArray.addFirst(0);
 		testArray.addLast(8);
 		testArray.addFirst(1);
-		Integer sizeCheck2 = testArray.size();
-		assertEquals(new Integer(3), sizeCheck2);
+		assertEquals(new Integer(3), (Integer) testArray.size());
 		testArray.removeFirst();
 		testArray.removeFirst();
 		Integer sizeCheck3 = testArray.size();
 		assertEquals(new Integer(1), sizeCheck3);
-		testArray.removeLast();
-		Integer sizeCheck4 = testArray.size();
-		assertEquals(new Integer(0), sizeCheck4);
-		testArray.removeFirst();
-		assertEquals(new Integer(0), (Integer) testArray.size());
-		// should still be 0, not -1
 	}
+
+	@Test
+	public void testSizeEdge() {
+		StudentArrayDeque<Integer> testArray = new StudentArrayDeque<Integer>();
+		testArray.removeLast();
+		// size cannot be -1
+		FailureSequence fs = new FailureSequence();
+        DequeOperation dequeOp1 = new DequeOperation("removeLast");
+        DequeOperation dequeOp2 = new DequeOperation("size");
+       
+        fs.addOperation(dequeOp1);
+        fs.addOperation(dequeOp2);
+
+        assertEquals(fs.toString(), new Integer(0), (Integer) testArray.size());
+
+	}
+	
 	@Test
 	public void testRemove() {
 		StudentArrayDeque<Integer> testArray = new StudentArrayDeque<Integer>();
-		assertEquals(null, testArray.removeLast());
 		testArray.addFirst(0);
 		testArray.addLast(1);
 		testArray.addLast(2);
@@ -72,11 +79,9 @@ public class TestArrayDeque1B {
 		testArray.addLast(7);
 		// 0 1 2 3 4 5 6 7
 		assertEquals(new Integer(0), (Integer) testArray.removeFirst());
-		// error with remove first's item that is returned
-		assertEquals(new Integer(7), (Integer) testArray.removeLast());
-		// 1 2 3 4 5 6
-		assertEquals(new Integer(6), (Integer) testArray.size());
+		// should be 0
 	}
+	
 	@Test
 	public void testUpsize() {
 		StudentArrayDeque<Integer> testArray = new StudentArrayDeque<Integer>();
